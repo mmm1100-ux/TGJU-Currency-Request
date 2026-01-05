@@ -68,7 +68,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       );
     }
 
-    /** لینک ورود ووکامرس با پارامتر بازگشت */
     private function tgju_get_wc_login_url_with_redirect() {
       $my_account = function_exists('wc_get_page_permalink')
         ? wc_get_page_permalink('myaccount')
@@ -79,7 +78,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       return add_query_arg( array('redirect_to' => $current_url), $my_account );
     }
 
-    /** احترام به redirect_to بعد از لاگین */
     public function tgju_wc_login_redirect( $redirect, $user ) {
       if ( isset($_REQUEST['redirect_to']) ) {
         $target = esc_url_raw( wp_unslash( $_REQUEST['redirect_to'] ) );
@@ -88,7 +86,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       return $redirect;
     }
 
-    /** صفحه ادمین (تنظیمات + لیست درخواست‌ها) */
     public function render_admin_page() {
       if ( isset( $_POST['tgju_email_submit'] ) && check_admin_referer( 'tgju_currency_request_save_email', 'tgju_currency_request_nonce_field' ) ) {
         $email = isset( $_POST['tgju_consultant_email'] ) ? sanitize_email( wp_unslash( $_POST['tgju_consultant_email'] ) ) : '';
@@ -151,7 +148,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
             echo '<th>' . esc_html__( 'ایمیل', 'tgju-currency-request' ) . '</th>';
             echo '</tr></thead><tbody>';
 
-            // نگاشت نام ارز برای نمایش فارسی
             $currency_names = array(
               'usd' => 'دلار آمریکا',
               'eur' => 'یورو',
@@ -164,7 +160,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
               'kwd' => 'دینار کویت',
             );
 
-            // نگاشت کشور: کد/نام انگلیسی → نام فارسی
             $country_names = array(
               'de' => 'آلمان', 'germany' => 'آلمان',
               'us' => 'آمریکا', 'usa' => 'آمریکا', 'united states' => 'آمریکا',
@@ -179,7 +174,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
               'ae' => 'امارات', 'uae' => 'امارات', 'united arab emirates' => 'امارات',
               'gb' => 'انگلیس', 'uk' => 'انگلیس', 'united kingdom' => 'انگلیس',
               'cn' => 'چین', 'china' => 'چین',
-              // هر مورد جدیدی داشتید اینجا اضافه کنید
             );
 
             foreach ( $requests as $request ) {
@@ -191,11 +185,9 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
               $phone        = get_post_meta( $request->ID, 'tgju_phone', true );
               $user_email   = get_post_meta( $request->ID, 'tgju_user_email', true );
 
-              // نمایش فارسی کشور
               $country_key     = strtolower( trim( $country_raw ) );
               $country_display = isset( $country_names[ $country_key ] ) ? $country_names[ $country_key ] : $country_raw;
 
-              // نمایش فارسی ارز
               $currency_display = isset( $currency_names[ $currency ] ) ? $currency_names[ $currency ] : $currency;
 
               echo '<tr>';
@@ -230,7 +222,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       <?php
     }
 
-    /** بارگذاری CSS/JS فرانت‌اند */
     public function enqueue_assets() {
       if ( is_admin() ) return;
 
@@ -257,7 +248,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       ) );
     }
 
-    /** شورتکد: رندر فرم (هر نمونه با UID یکتا) */
     public function render_form_shortcode( $atts = [] ) {
       $atts = shortcode_atts([
         'country_label' => 'کشور مقصد',
@@ -315,7 +305,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
           </div>
         </div>
 
-        <!-- Modals (scoped to this form) -->
         <div id="tgju-login-modal-<?php echo esc_attr($uid); ?>" class="tgju-modal tgju-login-modal">
           <div class="tgju-modal-content">
             <h3>ورود لازم است</h3>
@@ -364,7 +353,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       return ob_get_clean();
     }
 
-    /** AJAX: تبدیل نرخ */
     public function handle_ajax_convert() {
       check_ajax_referer( 'tgju_currency_request_nonce', 'nonce' );
 
@@ -418,7 +406,6 @@ if ( ! class_exists( 'TGJU_Currency_Request' ) ) {
       wp_send_json_success( array( 'converted' => $converted ) );
     }
 
-    /** AJAX: ارسال درخواست */
     public function handle_ajax_submit() {
       check_ajax_referer( 'tgju_currency_request_nonce', 'nonce' );
 
