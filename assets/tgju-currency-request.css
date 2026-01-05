@@ -1,4 +1,4 @@
-/* ــــــــ کارت سفید ــــــــ */
+
 .tgju-card{
   background:#fff;
   color:#000;
@@ -9,7 +9,6 @@
   max-width:100%;
 }
 
-/* ردیف اصلی: همه چیز در یک خط (روی اسکرین کوچک اسکرول افقی نرم) */
 .tgju-row{
   display:flex;
   align-items:stretch;
@@ -19,27 +18,24 @@
   scrollbar-width: thin;
 }
 
-/* فیلدها: لیبل بالا، ورودی پایین */
 .tgju-field{
   display:flex;
   flex-direction:column;
-  min-width:170px; /* برای جلوگیری از شکستن دوخطی */
+  min-width:170px;
 }
 .tgju-field--sm{ min-width:120px; }
 .tgju-field--result{ min-width:200px; }
 .tgju-field--btn{ min-width:160px; display:flex; justify-content:flex-end; }
 
-/* لیبل‌ها */
 .tgju-label{
   font-size:12px;
   font-weight:700;
   color:#222;
   margin:0 4px 6px;
-  white-space:nowrap;      /* جلوگیری از دو‌خطی شدن متن‌ها */
+  white-space:nowrap;    
 }
 .tgju-label--hidden{ visibility:hidden; height:0; margin:0; }
 
-/* ورودی‌ها و سلکت‌ها */
 .tgju-input{
   background:#fff;
   color:#111;
@@ -57,7 +53,6 @@
   box-shadow:0 0 0 4px rgba(243,147,39,.18);
 }
 
-/* خروجی تبدیل (استایل قرص‌مانند) */
 .tgju-output{
   display:flex;
   align-items:center;
@@ -69,10 +64,9 @@
   border:1px dashed #e5e7eb;
   font-weight:800;
   font-size:15px;
-  white-space:nowrap;   /* یک خطی */
+  white-space:nowrap; 
 }
 
-/* دکمه ثبت */
 .tgju-button{
   height:42px;
   padding:0 22px;
@@ -89,14 +83,12 @@
 .tgju-button:hover{ background:#d67e1e; }
 .tgju-button:active{ transform:translateY(1px); }
 
-/* حذف استایل قدیمی فرم */
 .tgju-currency-request-form{ margin:0; }
 .tgju-currency-request-label,
 .tgju-currency-request-input,
 .tgju-currency-request-output,
 .tgju-currency-request-button{ all:unset; }
 
-/* ــــــــ مودال‌ها: مرکز صفحه بدون تغییر JS ــــــــ */
 .tgju-modal{
   display:none;
   position:fixed;
@@ -106,7 +98,6 @@
   padding:16px;
 }
 
-/* وقتی jQuery با fadeIn → display:block می‌گذارد، با این هک تبدیل به flex و مرکز می‌کنیم */
 .tgju-modal[style*="display: block"]{
   display:flex !important;
   justify-content:center;
@@ -180,22 +171,18 @@
   color:#333;
 }
 
-/* === Responsive layout (only layout change) === */
-
-/* Tablet & Desktop: یک‌خطی بدون اسکرول افقی */
 @media (min-width: 768px) {
   .tgju-row{
-    flex-wrap: nowrap;     /* یک خط */
-    overflow-x: visible;   /* حذف اسکرول افقی */
+    flex-wrap: nowrap;  
+    overflow-x: visible;  
   }
 }
 
-/* Mobile: فیلدها ستونی و تمام‌عرض */
 @media (max-width: 767.98px) {
   .tgju-row{
     flex-direction: column;
     align-items: stretch;
-    overflow-x: visible;   /* اسکرول افقی نداشته باشد */
+    overflow-x: visible;  
   }
   .tgju-field,
   .tgju-field--sm,
@@ -207,17 +194,15 @@
   .tgju-button{ width: 100%; }
 }
 
-/* Desktop compact: کوچک‌تر شدن فیلدها و دکمه تا همگی در یک خط جا شوند */
 @media (min-width: 992px) {
   .tgju-row{
-    gap:10px;                 /* فاصله کمتر بین فیلدها */
+    gap:10px;             
   }
-  .tgju-field{ min-width:150px; }     /* کشور/ارز */
-  .tgju-field--sm{ min-width:100px; } /* مقدار */
-  .tgju-field--result{ min-width:170px; } /* خروجی تومان */
-  .tgju-field--btn{ min-width:140px; }    /* جای دکمه */
+  .tgju-field{ min-width:150px; }    
+  .tgju-field--sm{ min-width:100px; }
+  .tgju-field--result{ min-width:170px; }
+  .tgju-field--btn{ min-width:140px; }  
 
-  /* ارتفاع و پدینگ کمی کوچک‌تر شود */
   .tgju-input,
   .tgju-output,
   .tgju-button{

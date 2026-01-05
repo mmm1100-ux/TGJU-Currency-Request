@@ -1,17 +1,14 @@
 jQuery(document).ready(function ($) {
-  // برای هر بلوک فرم به صورت مستقل اسکریپت را مقداردهی کن
   $('.tgju-cr').each(function () {
     var $wrap = $(this);
     var $form = $wrap.find('.tgju-currency-request-form');
 
-    // عناصر داخل همین فرم
     var $country  = $form.find('.tgju-country-select');
     var $currency = $form.find('.tgju-currency-select');
     var $amount   = $form.find('.tgju-amount-input');
     var $output   = $form.find('.tgju-converted-output');
     var $submit   = $form.find('.tgju-submit-button');
 
-    // مودال‌های مخصوص همین فرم
     var $loginModal   = $wrap.find('.tgju-login-modal');
     var $successModal = $wrap.find('.tgju-success-modal');
     var $detailsModal = $wrap.find('.tgju-details-modal');
@@ -50,7 +47,6 @@ jQuery(document).ready(function ($) {
       );
     }
 
-    // رویدادها فقط داخل همین فرم
     $currency.on('change', updateConvertedValue);
     $amount.on('input', updateConvertedValue);
 
@@ -123,7 +119,6 @@ jQuery(document).ready(function ($) {
       );
     });
 
-    // بار اول
     updateConvertedValue();
   });
 });
